@@ -3,7 +3,7 @@ package com.example.bt04.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Aircraft {
 
     @Id
-    private String id;
+    private Long id;
 
     private String callsign, squawk, reg, flightno, route, type, category;
     private int altitude, heading, speed;
