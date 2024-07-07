@@ -1,4 +1,4 @@
-package domain;
+package me.bootdev.bt06.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
