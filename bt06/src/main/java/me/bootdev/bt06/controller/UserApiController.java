@@ -20,6 +20,9 @@ public class UserApiController {
 
     @PostMapping("/user")
     public String singUp(AddUserRequest request){
+        System.out.println("!!!!!!!!!!!!!");
+        System.out.println("!!!!!!!!!!!!!");
+
         userService.save(request);
         return "redirect:/login";
     }
