@@ -41,4 +41,8 @@ public class JwtFactory {
                 .compact();
     }
 
+    public static JwtFactory withDefaultValues(){
+        return JwtFactory.builder().build();
+    }
+
 }
