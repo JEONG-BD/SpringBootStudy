@@ -3,6 +3,7 @@ package com.example.bt07.controller;
 import com.example.bt07.domain.Article;
 import com.example.bt07.dto.AddArticleRequest;
 import com.example.bt07.dto.ArticleResponse;
+import com.example.bt07.dto.UpdateArticleRequest;
 import com.example.bt07.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,20 @@ public class BlogApiController {
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable Long id){
         Article article = blogService.findById(id);
         return ResponseEntity.ok().body(new ArticleResponse(article));
+    }
+
+    @DeleteMapping("/api/articles/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long id){
+        blogService.delete(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable Long id, UpdateArticleRequest request){
+        Article updatedArticle = blogService.update(id, request);
+
+        return  ResponseEntity.ok().body(updatedArticle);
     }
 
 
