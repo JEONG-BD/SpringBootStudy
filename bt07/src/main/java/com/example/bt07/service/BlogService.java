@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogService {
 
-    private BlogRepository blogRepository;
+    private final BlogRepository blogRepository;
 
     public Article save(AddArticleRequest request){
         return blogRepository.save(request.toEntity());

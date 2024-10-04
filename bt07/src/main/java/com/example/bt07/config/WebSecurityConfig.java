@@ -7,6 +7,7 @@ import com.example.bt07.service.UserService;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -20,7 +21,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @Configuration
 public class WebSecurityConfig {
 
-    private final UserService userService;
+    private final UserDetailService userDetailService;
 
     @Bean
     public WebSecurityCustomizer configure(){
@@ -60,15 +61,22 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .build();
     }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(HttpSecurity http,
+//                                                       BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
+//        AuthenticationManagerBuilder authenticationManager = http.getSharedObject(AuthenticationManagerBuilder.class);
+//        authenticationManager.setUse DetailsService(userService).passwordEncoder(bCryptPasswordEsencoder);
+//
+//        return  authenticationManager.build();
+//    }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http,
-                                                       BCryptPasswordEncoder bCryptPasswordEncoder,
-                                                       UserDetailService userDetailService) throws Exception {
-        AuthenticationManagerBuilder authenticationManager = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManager.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder);
-
-        return  authenticationManager.build();
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userDetailService);
+        return daoAuthenticationProvider;
     }
 
     @Bean
