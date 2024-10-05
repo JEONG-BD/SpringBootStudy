@@ -30,6 +30,10 @@ public class BlogApiController {
     @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticle(){
         List<ArticleResponse> articles = blogService.findAll().stream().map(ArticleResponse::new).toList();
+        System.out.println(articles);
+        System.out.println(articles);
+        System.out.println(articles);
+        System.out.println(articles);
 
         return ResponseEntity.ok().body(articles);
     }
