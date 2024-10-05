@@ -21,8 +21,10 @@ public class BlogApiController {
     private final BlogService blogService;
 
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestParam AddArticleRequest request){
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){
+
         Article savedArticle = blogService.save(request);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedArticle);
     }
@@ -30,10 +32,6 @@ public class BlogApiController {
     @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticle(){
         List<ArticleResponse> articles = blogService.findAll().stream().map(ArticleResponse::new).toList();
-        System.out.println(articles);
-        System.out.println(articles);
-        System.out.println(articles);
-        System.out.println(articles);
 
         return ResponseEntity.ok().body(articles);
     }
@@ -52,7 +50,8 @@ public class BlogApiController {
     }
 
     @PutMapping("/api/articles/{id}")
-    public ResponseEntity<Article> updateArticle(@PathVariable Long id, UpdateArticleRequest request){
+    public ResponseEntity<Article> updateArticle(@PathVariable Long id, @RequestBody UpdateArticleRequest request){
+
         Article updatedArticle = blogService.update(id, request);
 
         return  ResponseEntity.ok().body(updatedArticle);

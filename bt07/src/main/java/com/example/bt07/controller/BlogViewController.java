@@ -34,7 +34,7 @@ public class BlogViewController {
 
         model.addAttribute("article", new ArticleViewResponse(article));
 
-        return "articlle";
+        return "article";
     }
 
     @GetMapping("/new-article")
