@@ -23,3 +23,7 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+jwt:
+  issuer: springboot@test.com
+  secret-key: springboot-studyb
